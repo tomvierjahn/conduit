@@ -57,6 +57,7 @@ set(BASIC_TESTS t_conduit_smoke
                 t_conduit_node_parent
                 t_conduit_node_convert
                 t_conduit_serialize
+                t_conduit_serialize_read_multiple_times
                 t_conduit_array
                 t_conduit_list_of
                 t_conduit_node_binary_io
