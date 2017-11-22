@@ -98,6 +98,9 @@ TEST(conduit_serialize_read_multiple_times, const_ref) {
 
   Node second_node;
   second_node.set_data_using_schema(Schema(schema), bytes.data());
+  EXPECT_EQ(node["a/b/c"].as_double(), second_node["a/b/c"].as_double());
+  EXPECT_EQ(node["a/b/d"].as_double(), second_node["a/b/d"].as_double());
+  EXPECT_EQ(node["a/e"].as_double(), second_node["a/e"].as_double());
 
   serialize_const_ref(second_node, &schema, &bytes);
 
@@ -123,12 +126,14 @@ TEST(conduit_serialize_read_multiple_times, value) {
 
   Node second_node;
   second_node.set_data_using_schema(Schema(schema), bytes.data());
+  EXPECT_EQ(node["a/b/c"].as_double(), second_node["a/b/c"].as_double());
+  EXPECT_EQ(node["a/b/d"].as_double(), second_node["a/b/d"].as_double());
+  EXPECT_EQ(node["a/e"].as_double(), second_node["a/e"].as_double());
 
   serialize_value(second_node, &schema, &bytes);
 
   Node third_node;
   third_node.set_data_using_schema(Schema(schema), bytes.data());
-
   EXPECT_EQ(node["a/b/c"].as_double(), third_node["a/b/c"].as_double());
   EXPECT_EQ(node["a/b/d"].as_double(), third_node["a/b/d"].as_double());
   EXPECT_EQ(node["a/e"].as_double(), third_node["a/e"].as_double());
@@ -147,6 +152,9 @@ TEST(conduit_serialize_read_multiple_times, const_ref__constructor) {
   serialize_const_ref(node, &schema, &bytes);
 
   Node second_node(schema, bytes.data(), false);
+  EXPECT_EQ(node["a/b/c"].as_double(), second_node["a/b/c"].as_double());
+  EXPECT_EQ(node["a/b/d"].as_double(), second_node["a/b/d"].as_double());
+  EXPECT_EQ(node["a/e"].as_double(), second_node["a/e"].as_double());
 
   serialize_const_ref(second_node, &schema, &bytes);
 
@@ -170,6 +178,9 @@ TEST(conduit_serialize_read_multiple_times, value__constructor) {
   serialize_value(node, &schema, &bytes);
 
   Node second_node(schema, bytes.data(), false);
+  EXPECT_EQ(node["a/b/c"].as_double(), second_node["a/b/c"].as_double());
+  EXPECT_EQ(node["a/b/d"].as_double(), second_node["a/b/d"].as_double());
+  EXPECT_EQ(node["a/e"].as_double(), second_node["a/e"].as_double());
 
   serialize_value(second_node, &schema, &bytes);
 
