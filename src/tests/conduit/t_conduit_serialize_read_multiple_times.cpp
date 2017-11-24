@@ -95,6 +95,8 @@ TEST(conduit_serialize_read_multiple_times, const_ref) {
   std::vector<uint8> bytes;
 
   serialize_const_ref(node, &schema, &bytes);
+  const std::vector<uint8> bytes_serialization1(bytes);
+  const std::string schema_serialization1(schema);
 
   Node second_node;
   second_node.set_data_using_schema(Schema(schema), bytes.data());
@@ -103,6 +105,11 @@ TEST(conduit_serialize_read_multiple_times, const_ref) {
   EXPECT_EQ(node["a/e"].as_double(), second_node["a/e"].as_double());
 
   serialize_const_ref(second_node, &schema, &bytes);
+  const std::vector<uint8> bytes_serialization2(bytes);
+  const std::string schema_serialization2(schema);
+
+  EXPECT_EQ(bytes_serialization1, bytes_serialization2);
+  EXPECT_EQ(schema_serialization1, schema_serialization2);
 
   Node third_node;
   third_node.set_data_using_schema(Schema(schema), bytes.data());
@@ -123,6 +130,8 @@ TEST(conduit_serialize_read_multiple_times, value) {
   std::vector<uint8> bytes;
 
   serialize_value(node, &schema, &bytes);
+  const std::vector<uint8> bytes_serialization1(bytes);
+  const std::string schema_serialization1(schema);
 
   Node second_node;
   second_node.set_data_using_schema(Schema(schema), bytes.data());
@@ -131,6 +140,11 @@ TEST(conduit_serialize_read_multiple_times, value) {
   EXPECT_EQ(node["a/e"].as_double(), second_node["a/e"].as_double());
 
   serialize_value(second_node, &schema, &bytes);
+  const std::vector<uint8> bytes_serialization2(bytes);
+  const std::string schema_serialization2(schema);
+
+  EXPECT_EQ(bytes_serialization1, bytes_serialization2);
+  EXPECT_EQ(schema_serialization1, schema_serialization2);
 
   Node third_node;
   third_node.set_data_using_schema(Schema(schema), bytes.data());
@@ -150,6 +164,8 @@ TEST(conduit_serialize_read_multiple_times, const_ref__constructor) {
   std::vector<uint8> bytes;
 
   serialize_const_ref(node, &schema, &bytes);
+  const std::vector<uint8> bytes_serialization1(bytes);
+  const std::string schema_serialization1(schema);
 
   Node second_node(schema, bytes.data(), false);
   EXPECT_EQ(node["a/b/c"].as_double(), second_node["a/b/c"].as_double());
@@ -157,6 +173,11 @@ TEST(conduit_serialize_read_multiple_times, const_ref__constructor) {
   EXPECT_EQ(node["a/e"].as_double(), second_node["a/e"].as_double());
 
   serialize_const_ref(second_node, &schema, &bytes);
+  const std::vector<uint8> bytes_serialization2(bytes);
+  const std::string schema_serialization2(schema);
+
+  EXPECT_EQ(bytes_serialization1, bytes_serialization2);
+  EXPECT_EQ(schema_serialization1, schema_serialization2);
 
   Node third_node(schema, bytes.data(), false);
 
@@ -176,6 +197,8 @@ TEST(conduit_serialize_read_multiple_times, value__constructor) {
   std::vector<uint8> bytes;
 
   serialize_value(node, &schema, &bytes);
+  const std::vector<uint8> bytes_serialization1(bytes);
+  const std::string schema_serialization1(schema);
 
   Node second_node(schema, bytes.data(), false);
   EXPECT_EQ(node["a/b/c"].as_double(), second_node["a/b/c"].as_double());
@@ -183,6 +206,11 @@ TEST(conduit_serialize_read_multiple_times, value__constructor) {
   EXPECT_EQ(node["a/e"].as_double(), second_node["a/e"].as_double());
 
   serialize_value(second_node, &schema, &bytes);
+  const std::vector<uint8> bytes_serialization2(bytes);
+  const std::string schema_serialization2(schema);
+
+  EXPECT_EQ(bytes_serialization1, bytes_serialization2);
+  EXPECT_EQ(schema_serialization1, schema_serialization2);
 
   Node third_node(schema, bytes.data(), false);
 
