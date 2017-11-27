@@ -115,3 +115,24 @@ TEST(conduit_node_copy_external, assign) {
 
   EXPECT_EQ(external_node.to_json(), assigned_node.to_json());
 }
+
+//-----------------------------------------------------------------------------
+TEST(conduit_node_copy_external, set_external) {
+  testing::Storage storage(testing::AnyNode());
+
+  const bool external = true;
+  Node external_node(storage.schema, storage.data.data(), external);
+  const std::string original_json(external_node.to_json());
+
+  Node set_externaled_node;
+  set_externaled_node.set_external(external_node);
+  const std::string original_json_assigned(set_externaled_node.to_json());
+
+  storage.data[0] = ~storage.data[0];
+  storage.data[7] = ~storage.data[7];
+
+  EXPECT_NE(original_json, external_node.to_json());
+  EXPECT_NE(original_json_assigned, set_externaled_node.to_json());
+
+  EXPECT_EQ(external_node.to_json(), set_externaled_node.to_json());
+}
