@@ -54,6 +54,7 @@ set(BASIC_TESTS t_conduit_smoke
                 t_conduit_char8_str
                 t_conduit_datatype_tests
                 t_conduit_node
+		t_conduit_node_copy_external
                 t_conduit_node_parent
                 t_conduit_node_convert
                 t_conduit_serialize
