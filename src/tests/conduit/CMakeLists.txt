@@ -60,6 +60,7 @@ set(BASIC_TESTS t_conduit_smoke
                 t_conduit_array
                 t_conduit_list_of
                 t_conduit_node_binary_io
+		t_conduit_node_external_reflect_changes
                 t_conduit_node_save_load
                 t_conduit_node_paths
                 t_conduit_node_set
