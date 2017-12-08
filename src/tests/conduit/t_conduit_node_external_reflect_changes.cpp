@@ -76,3 +76,31 @@ TEST(external_node_reflects_changes, changes_to_referring) {
 
   EXPECT_EQ(referring_node.to_json(), original_node.to_json());
 }
+
+//-----------------------------------------------------------------------------
+TEST(external_node_reflects_changes, changes_to_original_via_update) {
+  conduit::Node original_node;
+  conduit::Node referring_node;
+
+  referring_node.set_external(original_node);
+
+  conduit::Node update;
+  update["A"] = 3.1415;
+  original_node.update(update);
+
+  EXPECT_EQ(original_node.to_json(), referring_node.to_json());
+}
+
+//-----------------------------------------------------------------------------
+TEST(external_node_reflects_changes, changes_to_referring_via_update) {
+  conduit::Node original_node;
+  conduit::Node referring_node;
+
+  referring_node.set_external(original_node);
+
+  conduit::Node update;
+  update["B"] = 4.123;
+  referring_node.update(update);
+
+  EXPECT_EQ(referring_node.to_json(), original_node.to_json());
+}
